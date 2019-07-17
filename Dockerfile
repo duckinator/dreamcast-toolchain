@@ -20,5 +20,5 @@ RUN cd /opt/toolchains/dc/kos && \
       printf "\n\n. /opt/toolchains/dc/kos/environ.sh\n" >> /etc/profile && \
       bash -c make
 
-RUN cd /opt/toolchains/dc/kos-ports && \
+RUN cd /opt/toolchains/dc/kos-ports/utils && \
       ./build-all.sh
