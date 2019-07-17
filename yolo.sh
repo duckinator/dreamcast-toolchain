@@ -20,9 +20,9 @@ function Popd() {
 run mkdir dc
 
 Pushd dc
-  run git clone git://git.code.sf.net/p/cadcdev/kallistios kos
+  run git clone --depth=1 git://git.code.sf.net/p/cadcdev/kallistios kos
 
-  run git clone git://git.code.sf.net/p/cadcdev/kos-ports
+  run git clone --depth=1 git://git.code.sf.net/p/cadcdev/kos-ports
   Pushd kos-ports
     run git submodule update --init
   Popd #kos-ports
