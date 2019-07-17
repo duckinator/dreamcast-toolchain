@@ -17,7 +17,7 @@ function Popd() {
 
 run mkdir -p /opt/toolchains/dc
 
-Pushd dc
+Pushd /opt/toolchains/dc
   run git clone --depth=1 git://git.code.sf.net/p/cadcdev/kallistios kos
 
   run git clone --depth=1 git://git.code.sf.net/p/cadcdev/kos-ports
