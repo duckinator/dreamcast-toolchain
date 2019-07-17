@@ -15,9 +15,7 @@ function Popd() {
   popd "$@" || exit 1
 }
 
-# TODO: INSTALL DEPENDENCIES
-
-run mkdir dc
+run mkdir -p /opt/toolchains/dc
 
 Pushd dc
   run git clone --depth=1 git://git.code.sf.net/p/cadcdev/kallistios kos
@@ -54,7 +52,7 @@ Pushd dc
   Popd #kos
 
   Pushd kos-ports/utils
-    run ./build-all
+    run ./build-all.sh
   Popd #kos-ports
 Popd #dc
 
