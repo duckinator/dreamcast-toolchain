@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$1" == "--rebuild" ]; then
-  docker build -t dreamcast-toolchain . || exit $?
+  docker build -t duckinator/dreamcast-toolchain . || exit $?
   exit
 fi
 
