@@ -5,4 +5,4 @@ if [ "$1" == "--rebuild" ]; then
   exit
 fi
 
-docker run --rm -it -v "$(pwd):/workspace" -w /workspace -u "$(id -u):$(id -g)" dreamcast-toolchain "$@" || exit $?
+docker run --rm -it -v "$(pwd):/workspace" -w /workspace -u "$(id -u):$(id -g)" duckinator/dreamcast-toolchain "$@" || exit $?
