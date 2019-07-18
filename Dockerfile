@@ -1,9 +1,11 @@
 FROM debian:10-slim
 
 RUN apt-get -y update && \
-      apt-get -y install libgmp-dev libmpfr-dev libmpc-dev gettext wget libelf-dev texinfo bison flex sed make tar bzip2 patch gawk git gcc g++ xz-utils curl && \
-      apt-get -y install libpng-dev libjpeg62-turbo-dev && \
-      apt-get -y install genisoimage wodim && \
+      apt-get -y install \
+        bison bzip2 curl flex g++ gawk gcc genisoimage gettext git libelf-dev \
+        libgmp-dev libjpeg62-turbo-dev libmpc-dev libmpfr-dev libpng-dev \
+        make patch python2 sed subversion tar texinfo wget wodim xz-utils \
+      && \
     mkdir -p /opt/toolchains/dc
 
 RUN cd /opt/toolchains/dc && \
@@ -13,7 +15,7 @@ RUN cd /opt/toolchains/dc && \
       git submodule update --init
 
 RUN cd /opt/toolchains/dc/kos/utils/dc-chain && \
-      ./download.sh --no-deps && ./unpack.sh --no-deps && make &&  ./cleanup.sh
+      ./download.sh --no-deps && ./unpack.sh --no-deps && make && ./cleanup.sh
 
 RUN cd /opt/toolchains/dc/kos && \
       cp doc/environ.sh.sample ./environ.sh && \
@@ -24,8 +26,10 @@ ENV BASH_ENV /opt/toolchains/dc/kos/environ.sh
 RUN cd /opt/toolchains/dc/kos && \
       bash -c make
 
+# HACK: The sed command is to force it to use Python 2.
 RUN cd /opt/toolchains/dc/kos-ports/utils && \
-      ./build-all.sh
+      sed -i 's/python/python2/' ../scripts/validate_dist.py && \
+      bash ./build-all.sh
 
 # Everything after this point is to set up fixuid, so files don't wind up
 # owned by the wrong user.
