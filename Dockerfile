@@ -31,6 +31,23 @@ RUN cd /opt/toolchains/dc/kos-ports/utils && \
       sed -i 's/python/python2/' ../scripts/validate_dist.py && \
       bash ./build-all.sh
 
+RUN cd /opt/toolchains && \
+      git clone --depth=1 https://github.com/Nold360/mksdiso && \
+      cd mksdiso/src/makeip && \
+      make default install
+
+# FIXME: install cmake earlier.
+RUN cd /opt/toolchains && \
+      apt-get -y install cmake && \
+      git clone --depth=1 https://github.com/kazade/img4dc && \
+      cd img4dc && \
+      mkdir build && \
+      cd build && \
+      cmake .. && \
+      make && \
+      mv mds4dc/mds4dc cdi4dc/cdi4dc /usr/local/bin
+
+
 # Everything after this point is to set up fixuid, so files don't wind up
 # owned by the wrong user.
 # https://boxboat.com/2017/07/25/fixuid-change-docker-container-uid-gid/
