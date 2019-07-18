@@ -13,7 +13,7 @@ RUN cd /opt/toolchains/dc && \
       git submodule update --init
 
 RUN cd /opt/toolchains/dc/kos/utils/dc-chain && \
-      ./download.sh --no-deps && ./unpack.sh --no-deps && make
+      ./download.sh --no-deps && ./unpack.sh --no-deps && make &&  ./cleanup.sh
 
 RUN cd /opt/toolchains/dc/kos && \
       cp doc/environ.sh.sample ./environ.sh && \
